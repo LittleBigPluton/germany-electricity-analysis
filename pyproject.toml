@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "electricity-analyse"
-version = "1.0.0"
+version = "1.1.0"
 description = "Analysis of Germany's electricity generation and consumption using SMARD data, including renewable share, residual load, source variability and interactive visualizations."
 readme = "README.md"
 requires-python = ">=3.10"
