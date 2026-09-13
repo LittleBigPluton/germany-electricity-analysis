@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "electricity-analyse"
 version = "1.0.0"
-description = "Analysis of German electricity generation and consumption data: hourly/daily trends, source stability, seasonal decomposition, and forecasting."
+description = "Analysis of Germany's electricity generation and consumption using SMARD data, including renewable share, residual load, source variability and interactive visualizations."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
@@ -43,7 +43,7 @@ dev = [
 ]
 
 [project.urls]
-Repository = "https://github.com/LittleBigPluton/Germany_electricity_analyse"
+Repository = "https://github.com/LittleBigPluton/germany-electricity-analysis"
 
 
 [project.scripts]
@@ -58,8 +58,10 @@ testpaths = ["tests"]
 addopts = "-v --cov=electricity_analyse --cov-report=term-missing"
 
 [tool.ruff]
-line-length = 100
 target-version = "py310"
+line-length = 100
+src = ["src", "tests"]
 
 [tool.ruff.lint]
-select = ["E", "F", "I", "W"]
+ignore = ["E501", "I001"]
+select = ["E", "F", "I", "B", "UP"]

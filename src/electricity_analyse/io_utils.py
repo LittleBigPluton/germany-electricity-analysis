@@ -123,7 +123,7 @@ def read_hourly_generation(path):
                 series[s["name"]].append(parse_float(row[s["hourly_col"]]))
 
     # Build a single proper x-axis
-    timestamps = pd.to_datetime([f"{d} {t}" for d, t in zip(date_parts, start_parts)], format=DATE_FORMATS[0], errors="coerce")
+    timestamps = pd.to_datetime([f"{d} {t}" for d, t in zip(date_parts, start_parts, strict=True)], format=DATE_FORMATS[0], errors="coerce")
 
     # Validation for time stamps
     if timestamps.isna().any():

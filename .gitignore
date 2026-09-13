@@ -1,8 +1,10 @@
-# Ignore all python cache files
+# Ignore all cache files
 __pycache__/
 *.pyc
 *.egg-info/
+.coverage
+htmlcov/
 
 # Ignore virtual environment
-venv_Germany_Electricity_Analyse/
-
+.venv/
+venv/

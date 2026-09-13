@@ -215,7 +215,7 @@ def build_comparison_messages(df):
     )
     return msgs
 
-def compute_stats_table(df, category_columns, extra_columns=["Total Renewable", "Total Conventional", "Total Production", "Total Consumption"]):
+def compute_stats_table(df, category_columns, extra_columns=None):
     """
     This function produces a separate "stats table" rather than appending summary rows
     (e.g., Average/Std Dev/Percentage) to the time-series dataframe. For each requested
@@ -239,6 +239,9 @@ def compute_stats_table(df, category_columns, extra_columns=["Total Renewable", 
         KeyError: If any requested column in `category_columns` or `extra_columns`
           is not present in `df`.
     """
+    if extra_columns is None:
+        extra_columns = ["Total Renewable", "Total Conventional", "Total Production", "Total Consumption"]
+
     cols = []
     for c in category_columns:
         cols.append(c)
@@ -352,14 +355,21 @@ def create_monthly_summary(df_daily,date_col = "Date"):
         df[date_col] = pd.to_datetime(df[date_col])
         df = df.set_index(date_col)
 
-    monthly_summary = df.resample("ME").agg({"Total Production": "sum","Total Consumption": "sum","Total Renewable": "sum","Total Conventional": "sum","Renewable Share":"sum","Residual Load": "sum"})
+    monthly_summary = df.resample("ME").agg({"Total Production": "sum","Total Consumption": "sum",
+                                             "Total Renewable": "sum","Total Conventional": "sum",
+                                             "Renewable Share":"sum","Residual Load": "sum"})
     monthly_summary["Renewable Share"] = monthly_summary["Total Renewable"]/ monthly_summary["Total Production"]* 100
     monthly_summary["Net Balance"] = monthly_summary["Total Production"] - monthly_summary["Total Consumption"]
     monthly_summary = monthly_summary.reset_index()
     monthly_summary["Month"] = monthly_summary[date_col].dt.to_period("M").astype(str)
-    monthly_summary = monthly_summary[["Month","Total Production","Total Consumption","Net Balance","Total Renewable","Total Conventional","Renewable Share","Residual Load"]]
-    monthly_summary = monthly_summary.rename(columns={"Total Production": "Total Production [MWh]","Total Consumption": "Total Consumption [MWh]","Net Balance": "Net Balance [MWh]",
-                                                      "Total Renewable": "Total Renewable [MWh]","Total Conventional": "Total Conventional [MWh]","Renewable Share": "Renewable Share [%]",
+    monthly_summary = monthly_summary[["Month","Total Production","Total Consumption","Net Balance",
+                                       "Total Renewable","Total Conventional","Renewable Share","Residual Load"]]
+    monthly_summary = monthly_summary.rename(columns={"Total Production": "Total Production [MWh]",
+                                                      "Total Consumption": "Total Consumption [MWh]",
+                                                      "Net Balance": "Net Balance [MWh]",
+                                                      "Total Renewable": "Total Renewable [MWh]",
+                                                      "Total Conventional": "Total Conventional [MWh]",
+                                                      "Renewable Share": "Renewable Share [%]",
                                                       "Residual Load": "Residual Load [MWh]"})
     return monthly_summary
 
