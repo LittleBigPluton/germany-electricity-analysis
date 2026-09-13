@@ -1,54 +1,48 @@
 import pandas as pd
-import matplotlib.pyplot as plt
-
-from electricity_analyse.io_utils import (
-    normalize_data_headers,
-    read_hourly_generation,
-    read_hourly_consumption,
-    read_daily_generation_df,
-    )
-
-from electricity_analyse.plotting import (
-    plot_hourly_stacked_area,
-    plot_sunburst_grid,
-    plot_error_bars_by_type,
-    plot_trends,
-    plot_drilldown,
-    plot_table,
-)
-
-from electricity_analyse.config import (
-    HOURLY_CONSUMPTION_FILE_RAW,
-    HOURLY_GENERATION_FILE_RAW,
-    DAILY_GENERATION_FILE_RAW,
-    HOURLY_CONSUMPTION_FILE_PROC,
-    HOURLY_GENERATION_FILE_PROC,
-    DAILY_GENERATION_FILE_PROC,
-    CSV_SEPARATOR,
-    DAILY_CONSUMPTION_COL,
-    ALL_DAILY_CATEGORIES,
-    MWH_SUFFIX,
-)
 
 from electricity_analyse.analysis import (
-    add_daily_totals,
-    set_date_index,
     add_daily_consumption_from_hourly,
+    add_daily_totals,
     build_comparison_messages,
     compute_stats_table,
-    rank_stability,
-    linear_trend,
-    describe_trend,
     create_monthly_summary,
-    get_top_days,
+    describe_trend,
     get_key_findings,
+    get_top_days,
+    linear_trend,
+    rank_stability,
+    set_date_index
+)
+from electricity_analyse.config import (
+    ALL_DAILY_CATEGORIES,
+    CSV_SEPARATOR,
+    DAILY_CONSUMPTION_COL,
+    DAILY_GENERATION_FILE_RAW,
+    HOURLY_CONSUMPTION_FILE_RAW,
+    HOURLY_GENERATION_FILE_RAW,
+    MWH_SUFFIX
+)
+from electricity_analyse.export_utils import (
+    export_analysis,
+    export_csv,
+    export_figure
+)
+from electricity_analyse.io_utils import (
+    normalize_data_headers,
+    read_daily_generation_df,
+    read_hourly_consumption,
+    read_hourly_generation
+)
+from electricity_analyse.plotting import (
+    plot_drilldown,
+    plot_error_bars_by_type,
+    plot_hourly_stacked_area,
+    plot_sunburst_grid,
+    plot_table,
+    plot_trends
 )
 
-from electricity_analyse.export_utils import(
-    export_analysis,
-    export_figure,
-    export_csv,
-)
+
 def main():
     # ----------------------------
     # 0) Data processing

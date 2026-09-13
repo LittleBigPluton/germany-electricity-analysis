@@ -12,11 +12,6 @@ ROOT_DIRECTORY = script_dir.parent.parent
 HOURLY_GENERATION_FILE_RAW = ROOT_DIRECTORY/"data/yearly/energy/2025/raw/Actual_generation_202501010000_202601010000_Hour.csv"
 HOURLY_CONSUMPTION_FILE_RAW = ROOT_DIRECTORY/"data/yearly/energy/2025/raw/Actual_consumption_202501010000_202601010000_Hour.csv"
 DAILY_GENERATION_FILE_RAW = ROOT_DIRECTORY/"data/yearly/energy/2025/raw/Actual_generation_202501010000_202601010000_Day.csv"
-
-HOURLY_GENERATION_FILE_PROC = ""
-HOURLY_CONSUMPTION_FILE_PROC = ""
-DAILY_GENERATION_FILE_PROC = ""
-
 CSV_SEPARATOR = ";"
 
 # ----------------------------
